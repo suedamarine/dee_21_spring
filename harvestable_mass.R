@@ -30,11 +30,11 @@ inv.mass <- inv.bio*total_mass_tonnes
 
 cu_mass_df <- data.frame(harvestable_mass$size[1:42], cum.biomass, inv.mass)
 
-cu_h_mass <- cu_mass_df$inv.mass[17]
+cu_h_mass <- cu_mass_df$inv.mass[29]
 
-cu_hor_mass <- bio.cumfreq[17]
+cu_hor_mass <- bio.cumfreq[29]
 
-cu_harvest_mass <- ggplot(cu_mass_df, aes(harvestable_mass$size[1:42],inv.mass)) + geom_point(col = "#a6611a") + geom_line(col = "#a6611a") + geom_vline(xintercept = 20, col = "#dfc27d", linetype = "dashed", alpha = 0.9) + geom_hline(yintercept = cu_h_mass, col = "#dfc27d", linetype = "dashed", alpha = 0.9 ) + theme_minimal() + labs(x= "Length mm", y = "Biomass Tonnes")
+cu_harvest_mass <- ggplot(cu_mass_df, aes(harvestable_mass$size[1:42],inv.mass)) + geom_point(col = "#a6611a") + geom_line(col = "#a6611a") + geom_vline(xintercept = 32, col = "#dfc27d", linetype = "dashed", alpha = 0.9) + geom_hline(yintercept = cu_h_mass, col = "#dfc27d", linetype = "dashed", alpha = 0.9 ) + theme_minimal() + labs(x= "Length mm", y = "Biomass Tonnes")
 
 # Open a pdf file
 pdf("plots/harvest_mass.pdf") 
@@ -46,3 +46,8 @@ cu_harvest_mass
 dev.off() 
 
 write.csv(cu_mass_df, "tabs/cu_mass_df.csv")
+
+
+
+
+

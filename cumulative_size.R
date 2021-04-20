@@ -31,11 +31,11 @@ inv.bio <- 1-bio.cumfreq
 inv.mass <- inv.bio*total_mass_tonnes
 cu_mass_df <- data.frame(cumulative_mass$size[1:42], cum.biomass, inv.mass)
 
-cu_h_mass <- cu_mass_df$inv.mass[17]
+cu_h_mass <- cu_mass_df$inv.mass[29]
 
-cu_hor_mass <- bio.cumfreq[17]
+cu_hor_mass <- bio.cumfreq[29]
 
-cu_mass <- ggplot(cu_mass_df, aes(cumulative_mass$size[1:42],bio.cumfreq)) + geom_point(col = "#a6611a") + geom_line(col = "#a6611a") + geom_vline(xintercept = 20, col = "#dfc27d", linetype = "dashed", alpha = 0.9) + geom_hline(yintercept = cu_hor_mass, col = "#dfc27d", linetype = "dashed", alpha = 0.9 ) + theme_minimal() + labs(x= "Length mm", y = "Cumulative Relative Biomass")
+cu_mass <- ggplot(cu_mass_df, aes(cumulative_mass$size[1:42],bio.cumfreq)) + geom_point(col = "#a6611a") + geom_line(col = "#a6611a") + geom_vline(xintercept = 32, col = "#dfc27d", linetype = "dashed", alpha = 0.9) + geom_hline(yintercept = cu_hor_mass, col = "#dfc27d", linetype = "dashed", alpha = 0.9 ) + theme_minimal() + labs(x= "Length mm", y = "Cumulative Relative Biomass")
 cu_mass
 # Open a pdf file
 pdf("plots/cumulative_mass.pdf") 

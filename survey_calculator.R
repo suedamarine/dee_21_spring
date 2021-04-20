@@ -11,7 +11,7 @@ cockle_counts <- temp_cockle %>%
   mutate(total_count = Y0Count + Y1Count + Y2Count + Y3Count) %>% 
   gather(year_class, count, 'Y0Count', 'Y1Count', 'Y2Count', 'Y3Count', 'total_count')
 
-# summary table count (selected blocks)
+# summary table count (all blocks)
 summary_counts_blocks <- cockle_counts %>% 
   filter(Block %in% c ("Mostyn Deep", "Salisbury Middle", "Caldy", "Thurstaston", "West Kirby", "No 3 Buoy", "Salisbury", "Mostyn", "Talacre")) %>%
   mutate(count_sum = count*10*150^2) %>%
@@ -23,6 +23,21 @@ cockle_mass <- temp_cockle %>%
   select(Stn, Block, Grid, Sampled, Y0Weight, Y1Weight, Y2Weight, Y3Weight, twenty) %>%
   mutate(total_weight = Y0Weight + Y1Weight + Y2Weight+ Y3Weight) %>%
   gather(year_class, mass, 'Y0Weight', 'Y1Weight', 'Y2Weight', 'Y3Weight', 'total_weight', 'twenty')
+
+# summary table mass (all blocks)
+summary_counts_mass <- cockle_mass %>% 
+  filter(Block %in% c ("Mostyn Deep", "Salisbury Middle", "Caldy", "Thurstaston", "West Kirby", "No 3 Buoy", "Salisbury", "Mostyn", "Talacre")) %>%
+  mutate(mass_sum = mass*10/1000*150^2) %>%
+  group_by(year_class, Block) %>%
+  summarize(mass_totals = sum(mass_sum, na.rm = TRUE))
+
+# summary table mass (selected blocks)
+summary_counts_mass <- cockle_mass %>% 
+  filter(Block %in% c ("Mostyn Deep", "Salisbury Middle",   "No 3 Buoy", "Salisbury", "Mostyn", "Talacre")) %>%
+  mutate(mass_sum = mass*10/1000*150^2) %>%
+  group_by(year_class, Block) %>%
+  summarize(mass_totals = sum(mass_sum, na.rm = TRUE))
+
 
 # groupwise means for counts, filtered to remove NAs
 
@@ -54,6 +69,7 @@ write.csv(count_intervals_filtered, "tabs/count_intervals_filtered.csv")
 
 g_150_m <- cockle_mass %>% 
   filter(year_class %in% c("Y0Weight", "Y1Weight", "Y2Weight", "Y3Weight", "total_weight", "twenty")) %>%
+  filter(Block %in% c("Mostyn Deep", "Salisbury Middle", "Caldy", "Thurstaston", "West Kirby", "No 3 Buoy", "Salisbury", "Mostyn", "Talacre")) %>%
   filter(!is.na(mass))
 
 # perform the groupwisemean selecting 10000 replicates and Bca
